@@ -1,0 +1,4 @@
+Django use the Model -> Template -> View (MTV) pattern like MVC on other frameworks
+To run web server (python .\manage.py runserver) from ./Djangosite
+To Create application (python .\manage.py startapp main  ) main - is the name of application
+To register the application in site ()
