@@ -1,0 +1,1 @@
+Django use the Model -> Template -> View (MTV) pattern like MVC on other frameworks
