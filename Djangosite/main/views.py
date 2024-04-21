@@ -2,4 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse , HttpResponseNotFound
 
 def index(request):
-    return HttpResponse("Hello world")
+    return render(request, 'main/index.html',{'title': 'My site'})
+
+def projects(request):
+    return render(request, 'main/projects.html')
