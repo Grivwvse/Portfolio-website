@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>My Projects</title>
+{% extends 'main/base.html' %}
 
-</head>
-<body>  
-    {% for i in menu %}
-    <li>{{i}}</li>
-    {% endfor %}
-</body>
+{% block content %}
+<h2>Проект 1</h2>
+<p>Описание проекта 1</p>
 
-</html>
+<h2>Проект 2</h2>
+<p>Описание проекта 2</p>
+
+<h2>Проект 3</h2>
+<p>Описание проекта 3</p>
+
+<h2>Проект 4</h2>
+<p>Описание проекта 4</p>
+{% endblock %}
