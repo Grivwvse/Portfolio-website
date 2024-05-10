@@ -1,10 +1,18 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-<h2>Основная информация</h2>
-<p>Имя: {{Person.fullName}}</p>
-<p>Должность: {{Person.post}}</p>
-<p>Опыт работы: 5 лет</p>
+
+{% if Person.photo %}
+    <div class="imgcontainer">
+        <img src="{{Person.photo.url}}" alt="мое фото" />
+        <div>
+            <h2>Основная информация</h2>
+            <p>Имя: {{Person.fullName}}</p>
+            <p>Должность: {{Person.post}}</p>
+            <p>Опыт работы: 5 лет</p>
+        </div>
+    </div>
+{% endif %}
 
 <h2>Краткая информация</h2>
 <p>{{Person.about}}</p>

@@ -29,6 +29,11 @@ html, body {
     margin: 0 10px;
     font-weight: bold;
 }
+
+.menu a:active {
+    color: #afaaaa;
+}
+
 h1 {
     text-align: center;
     color: #fff;
@@ -85,4 +90,18 @@ p {
     -webkit-flex:  1 1 auto;
     -ms-flex:  1 1 auto;
     flex:  1 1 auto;
+}
+
+.imgcontainer {
+    max-width: 800px; /* Максимальная ширина контейнера */
+    margin: 0 auto; /* Центрирование контейнера по горизонтали */
+    overflow: hidden; /* Обработка переполнения */
+}
+
+.imgcontainer img {
+    float: left; /* Выравнивание изображения по правому краю */
+    max-width: 30%; /* Максимальная ширина изображения в контейнере (50% ширины контейнера) */
+    height: auto; /* Автоматическая высота */
+    margin-right: 20px; /* Отступ слева от изображения */
+    margin-top: 20px;
 }
