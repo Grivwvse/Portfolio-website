@@ -23,14 +23,13 @@ def index(request):
         'Skills': skills, 
         'Education':education, 
         'Experience' :experience,
-        'menu': menu
     }
 
     return render(request, 'main/index.html', context=context)
 
 def projects(request):
     projects = Projects.objects.all()
-    return render(request, 'main/projects.html',{'title': 'My site', 'Projects': projects, 'menu': menu})
+    return render(request, 'main/projects.html',{'title': 'My site', 'Projects': projects})
 
 def contact(request):
     return HttpResponse("Contacts")
