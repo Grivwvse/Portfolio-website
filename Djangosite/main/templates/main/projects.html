@@ -1,15 +1,18 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-<h2>Проект 1</h2>
-<p>Описание проекта 1</p>
 
-<h2>Проект 2</h2>
-<p>Описание проекта 2</p>
+<ul>
+    {% for p in Projects %}
+    <li>
+        <h2>{{p.projName}}</h2>
+        <p>Описание: {{p.description}}</p>
+        <div class="flex">
+            <a href="{{ p.get_absolute_url }}" class="btn-new">Подробнее</a>
+            <a href="{{p.link}}" class="btn-new">GitHub</a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
 
-<h2>Проект 3</h2>
-<p>Описание проекта 3</p>
-
-<h2>Проект 4</h2>
-<p>Описание проекта 4</p>
 {% endblock %}

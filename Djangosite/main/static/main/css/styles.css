@@ -51,3 +51,38 @@ li h3 {
 p {
     margin: 5px 0;
 }
+
+.btn-new {
+    border-radius: 10px;
+    color: white;
+    width: 110px;
+    height: 40px;
+    display: block;
+    text-align: center;
+    line-height: 40px;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    transition: .2s linear;
+    background: #073f7c;
+}
+
+.btn-new:hover {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #073f7c;
+}
+
+.flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    gap: 10px;
+}
+
+.flex-child {
+    -webkit-box-flex: 1 1 auto;
+    -moz-box-flex:  1 1 auto;
+    -webkit-flex:  1 1 auto;
+    -ms-flex:  1 1 auto;
+    flex:  1 1 auto;
+}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Person(models.Model):
     fullName = models.CharField(max_length=255)
@@ -11,6 +12,9 @@ class Projects(models.Model):
     projName = models.CharField(max_length=255)
     description = models.TextField()
     link = models.TextField()
+
+    def get_absolute_url(self):
+        return reverse('project', kwargs={'project_id': self.pk})
 
 class Skills(models.Model):
     preson = models.ForeignKey(Person,on_delete=models.CASCADE)
