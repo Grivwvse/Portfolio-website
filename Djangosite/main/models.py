@@ -26,5 +26,7 @@ class Experience(models.Model):
 class Education(models.Model):
     preson = models.ForeignKey(Person,on_delete=models.CASCADE)
     eduName = models.TextField()
+    eduDepartment = models.TextField(default='IT')
+    eduQualification = models.TextField(default='IT')
     dateStart = models.DateField()
     dateEnd = models.DateField()
