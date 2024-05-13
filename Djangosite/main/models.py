@@ -16,13 +16,16 @@ class Projects(models.Model):
     projName = models.CharField(max_length=255, verbose_name="Имя проекта")
     description = models.TextField(verbose_name="Описание проекта")
     link = models.TextField(verbose_name="Ссылка")
+    photo = models.ImageField(upload_to="photos/projects", verbose_name="Фото")
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
 
     def get_absolute_url(self):
-        return reverse('project', kwargs={'project_id': self.pk})
+        return reverse('project', kwargs={'project_slug': self.slug})
     
     class Meta:
         verbose_name = 'Проекты'
         verbose_name_plural = 'Проекты'
+
 
 class Skills(models.Model):
     preson = models.ForeignKey(Person,on_delete=models.CASCADE)

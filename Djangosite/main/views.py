@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse , HttpResponseNotFound
 from .models import Person
 from .models import Skills
@@ -34,6 +34,13 @@ def projects(request):
 def contact(request):
     return HttpResponse("Contacts")
 
-def showPost(request, project_id):
-    return HttpResponse("showPost = {project_id}")
+def showProject(request, project_slug):
+    project = get_object_or_404(Projects, slug = project_slug)
+
+    context = {
+        'title': project.projName, 
+        'Project' : project,
+    }
+
+    return render(request, 'main/project.html', context=context)
 

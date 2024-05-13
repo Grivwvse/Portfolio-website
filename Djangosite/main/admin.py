@@ -10,6 +10,7 @@ class ProjectsAdmin(admin.ModelAdmin):
     list_display = ('id', 'projName', 'description', 'link', 'preson')
     list_display_links=('id', 'projName')
     search_fields = ('projName', 'description')
+    prepopulated_fields = {"slug": ("projName",)}
 
 class SkillsAdmin(admin.ModelAdmin):
     list_display = ('id','skiName', 'preson')
