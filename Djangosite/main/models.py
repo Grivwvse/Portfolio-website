@@ -58,3 +58,13 @@ class Education(models.Model):
     class Meta:
         verbose_name = 'Образование'
         verbose_name_plural = 'Образование'
+        
+class MailNotification(models.Model):
+    preson = models.ForeignKey(Person,on_delete=models.CASCADE)
+    mailLogin = models.CharField(max_length=255, verbose_name="Логин")
+    mailPassword = models.CharField(max_length=255,verbose_name="Пароль")
+    isActive = models.BooleanField(default=False, verbose_name="Активно")
+
+    class Meta:
+        verbose_name = 'Электранная почта'
+        verbose_name_plural = 'Электронные почты'

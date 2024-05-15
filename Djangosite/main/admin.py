@@ -27,8 +27,19 @@ class EducationAdmin(admin.ModelAdmin):
     list_display_links=('id', 'eduName')
     search_fields = ('eduName', 'eduDepartment')
 
+class MailNotificationAdmin(admin.ModelAdmin):
+    list_display = ('id','mailLogin','mailPassword', 'isActive', 'preson')
+    list_display_links=('id', 'mailLogin')
+    search_fields = ('id', 'mailLogin', 'isActive')
+
+    def save_model(self, request, obj, form, change):
+        for char in obj.mailPassword:
+            obj.mailPassword += chr(ord(char) + 6)
+        super().save_model(request, obj, form, change)
+
 admin.site.register(Projects, ProjectsAdmin)
 admin.site.register(Skills, SkillsAdmin)
 admin.site.register(Experience, ExperienceAdmin)
 admin.site.register(Education, EducationAdmin)
 admin.site.register(Person, PersonAdmin)
+admin.site.register(MailNotification, MailNotificationAdmin)

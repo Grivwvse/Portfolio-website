@@ -1,11 +1,9 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse , HttpResponseNotFound
-from .models import Person
-from .models import Skills
-from .models import Education
-from .models import Experience
-from .models import Projects
-import datetime
+from .forms import FeedbackForm
+from .models import *
+
+
 
 menu = [{'title': "Главная", 'url_name': 'home'},
         {'title': "Проекты", 'url_name': 'projects'},
@@ -32,7 +30,12 @@ def projects(request):
     return render(request, 'main/projects.html',{'title': 'My site', 'Projects': projects})
 
 def contact(request):
-    return HttpResponse("Contacts")
+    if request.method == 'POST':
+        feedbackForm = FeedbackForm(request.POST)
+        if feedbackForm.is_valid():
+            print(feedbackForm.cleaned_data)
+    feedbackForm = FeedbackForm()     
+    return render(request, 'main/contact.html',{'form': feedbackForm,'title': 'My site'})
 
 def showProject(request, project_slug):
     project = get_object_or_404(Projects, slug = project_slug)

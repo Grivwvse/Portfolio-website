@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+<div class="contact_div">Связаться со мной</div>
+
+
+    <form action="{% url 'contact' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+
+
+        <span class="separator"></span>
+        
+
+        <button class="btn-new" type="submit">ОТПРАВИТЬ</button>
+    </form>
+{% endblock %}
