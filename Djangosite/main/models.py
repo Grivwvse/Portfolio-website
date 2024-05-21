@@ -64,6 +64,8 @@ class MailNotification(models.Model):
     mailLogin = models.CharField(max_length=255, verbose_name="Логин")
     mailPassword = models.CharField(max_length=255,verbose_name="Пароль")
     isActive = models.BooleanField(default=False, verbose_name="Активно")
+    mailSmtpServer = models.CharField(max_length=255, verbose_name="SMTP сервер")
+    mailSmtpPort = models.IntegerField(default=465, verbose_name="SMTP порт")
 
     class Meta:
         verbose_name = 'Электранная почта'

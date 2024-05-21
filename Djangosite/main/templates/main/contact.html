@@ -5,8 +5,11 @@
 <div class="contact_div">Связаться со мной</div>
 
 
+
     <form action="{% url 'contact' %}" method="post">
         {% csrf_token %}
+        
+
         {{ form.as_p }}
 
 
@@ -16,4 +19,27 @@
 
         <button class="btn-new" type="submit">ОТПРАВИТЬ</button>
     </form>
+
+
+    <span class="separator"></span>
+
+    
+    <hr>
+    <ul class="social-media-container">
+      <li><a href="#"  >
+        <i class="bi bi-github"></i></a>
+      </li>
+      <li><a href="#">
+        <i class="bi bi-telegram"></i></a>
+      </li>
+      <li><a>
+        {% for m in mail %}
+          <p><i class="bi bi-envelope-at"></i>{{m.mailLogin}}</p></a>
+        {% endfor %}
+
+      </li>  
+    </ul>
+    <hr>
+
+
 {% endblock %}

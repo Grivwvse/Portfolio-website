@@ -33,8 +33,10 @@ class MailNotificationAdmin(admin.ModelAdmin):
     search_fields = ('id', 'mailLogin', 'isActive')
 
     def save_model(self, request, obj, form, change):
+        encrypted_password = ""
         for char in obj.mailPassword:
-            obj.mailPassword += chr(ord(char) + 6)
+            encrypted_password += chr(ord(char) + 6)
+        obj.mailPassword = encrypted_password
         super().save_model(request, obj, form, change)
 
 admin.site.register(Projects, ProjectsAdmin)
