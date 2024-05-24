@@ -9,6 +9,7 @@ html, body {
 }
 .container {
     max-width: 800px;
+    min-width: 500px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
@@ -100,7 +101,8 @@ p {
 }
 
 .imgcontainer {
-    max-width: 800px; /* Максимальная ширина контейнера */
+    width: auto;
+    max-width: 810px; /* Максимальная ширина контейнера */
     margin: 0 auto; /* Центрирование контейнера по горизонтали */
     overflow: hidden; /* Обработка переполнения */
 }

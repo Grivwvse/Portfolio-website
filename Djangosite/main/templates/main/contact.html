@@ -26,17 +26,15 @@
     
     <hr>
     <ul class="social-media-container">
-      <li><a href="#"  >
+      <li><a href="{{ contacts.github }}">
         <i class="bi bi-github"></i></a>
       </li>
-      <li><a href="#">
+      <li><a href="{{ contacts.telegram }}">
         <i class="bi bi-telegram"></i></a>
       </li>
       <li><a>
-        {% for m in mail %}
-          <p><i class="bi bi-envelope-at"></i>{{m.mailLogin}}</p></a>
-        {% endfor %}
-
+          <p><i class="bi bi-envelope-at"></i>{{contacts.mail}}</p></a>
+          <p><i class="bi bi-geo-alt"></i>{{Person.location}}</p></a>
       </li>  
     </ul>
     <hr>

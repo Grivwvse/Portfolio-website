@@ -39,9 +39,15 @@ class MailNotificationAdmin(admin.ModelAdmin):
         obj.mailPassword = encrypted_password
         super().save_model(request, obj, form, change)
 
+class ContactsAdmin(admin.ModelAdmin):
+    list_display = ('id', 'mail', 'github', 'telegram', 'phone','preson')
+    list_display_links=('id', 'mail', 'github', 'telegram', 'phone')
+    search_fields = ('id', 'mail')
+
 admin.site.register(Projects, ProjectsAdmin)
 admin.site.register(Skills, SkillsAdmin)
 admin.site.register(Experience, ExperienceAdmin)
 admin.site.register(Education, EducationAdmin)
 admin.site.register(Person, PersonAdmin)
 admin.site.register(MailNotification, MailNotificationAdmin)
+admin.site.register(Contacts, ContactsAdmin)

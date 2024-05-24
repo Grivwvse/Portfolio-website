@@ -6,6 +6,7 @@ class Person(models.Model):
     about = models.TextField(verbose_name="Обо мне")
     post = models.CharField(max_length=255, verbose_name="Должность")
     photo = models.ImageField(upload_to="photos/", verbose_name="Фото")
+    location = models.CharField(max_length=255, verbose_name="Локация")
 
     class Meta:
         verbose_name = 'Вы'
@@ -16,7 +17,7 @@ class Projects(models.Model):
     projName = models.CharField(max_length=255, verbose_name="Имя проекта")
     description = models.TextField(verbose_name="Описание проекта")
     link = models.TextField(verbose_name="Ссылка")
-    photo = models.ImageField(upload_to="photos/projects", verbose_name="Фото")
+    photo = models.ImageField(upload_to="photos/projects", verbose_name="Фото", null=True, blank=True)
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
 
     def get_absolute_url(self):
@@ -50,8 +51,8 @@ class Experience(models.Model):
 class Education(models.Model):
     preson = models.ForeignKey(Person,on_delete=models.CASCADE)
     eduName = models.TextField(verbose_name="Учебн. учреждение")
-    eduDepartment = models.TextField(default='IT', verbose_name="Факультет")
-    eduQualification = models.TextField(default='IT', verbose_name="Квалификация")
+    eduDepartment = models.TextField(verbose_name="Факультет", null=True, blank=True)
+    eduQualification = models.TextField(verbose_name="Квалификация", null=True, blank=True)
     dateStart = models.DateField(verbose_name="Начало")
     dateEnd = models.DateField(verbose_name="Конец")
 
@@ -68,5 +69,16 @@ class MailNotification(models.Model):
     mailSmtpPort = models.IntegerField(default=465, verbose_name="SMTP порт")
 
     class Meta:
-        verbose_name = 'Электранная почта'
-        verbose_name_plural = 'Электронные почты'
+        verbose_name = 'Почтовое оповещение'
+        verbose_name_plural = 'Почтовое оповещение'
+
+class Contacts(models.Model):
+    preson = models.ForeignKey(Person,on_delete=models.CASCADE)
+    mail = models.CharField(max_length=255, verbose_name="Почта")
+    github = models.TextField(verbose_name="Github")
+    telegram = models.TextField(verbose_name="Telegram", null=True, blank=True)
+    phone = models.CharField(max_length=255, verbose_name="Телефон", null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Контакт'
+        verbose_name_plural = 'Контакты'

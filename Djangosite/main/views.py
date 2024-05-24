@@ -45,7 +45,6 @@ def index(request):
     
     context = {
         'title': 'My site', 
-        'Person': person[0], 
         'Skills': skills, 
         'Education':education, 
         'Experience' :experience,
@@ -58,7 +57,7 @@ def projects(request):
     return render(request, 'main/projects.html',{'title': 'My site', 'Projects': projects})
 
 def contact(request):
-    mail = MailNotification.objects.filter(isActive = True)
+    contacts = Contacts.objects.all()
     if request.method == 'POST':
         feedbackForm = FeedbackForm(request.POST)
         if feedbackForm.is_valid():
@@ -72,7 +71,7 @@ def contact(request):
                 feedbackForm.add_error(None, 'Некорректно указан почтовый ящик')
     else:
         feedbackForm = FeedbackForm()     
-    return render(request, 'main/contact.html',{'form': feedbackForm,'title': 'My site', 'mail': mail})
+    return render(request, 'main/contact.html',{'form': feedbackForm,'title': 'My site', 'contacts': contacts[0]})
 
 def showProject(request, project_slug):
     project = get_object_or_404(Projects, slug = project_slug)
