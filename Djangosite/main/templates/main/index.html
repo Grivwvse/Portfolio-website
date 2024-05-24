@@ -6,44 +6,46 @@
     <div class="imgcontainer">
         <img src="{{Person.photo.url}}" alt="мое фото" />
         <div>
-            <h2>Основная информация</h2>
-            <p>Имя: {{Person.fullName}}</p>
-            <p>Должность: {{Person.post}}</p>
-            <p>Опыт работы: 5 лет</p>
+            <h2>Про меня</h2>
+            <p>Меня зовут {{Person.fullName}}
+            <p>{{Person.about}}</p>
         </div>
     </div>
 {% endif %}
 
-<h2>Краткая информация</h2>
-<p>{{Person.about}}</p>
-
-<h2>Навыки</h2>
-<ul>
-    {% for s in Skills %}
-    <li>{{s.skiName}}</li>
-    {% endfor %}
-</ul>
-
-<h2>Образование</h2>
+{% if Skills %}
+    <h2>Мои навыки</h2>
     <ul>
-        {% for e in Education %}
+        {% for s in Skills %}
+        <li>{{s.skiName}}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if Education %}
+    <h2>Образование</h2>
+        <ul>
+            {% for e in Education %}
+            <li>
+                <h3>{{e.eduName}} ({{e.dateStart.year}} - {{e.dateEnd.year}})</h3>
+                <p>Кафедра: {{e.eduDepartment}}</p>
+                <p>Квалификация: {{e.eduQualification}}</p>
+            </li>
+            {% endfor %}
+        </ul>
+{% endif %}
+
+{% if Experience %}
+    <h2>Опыт работы</h2>
+
+    <ul>
+        {% for ex in Experience %}
         <li>
-            <h3>{{e.eduName}} ({{e.dateStart.year}} - {{e.dateEnd.year}})</h3>
-            <p>Кафедра: {{e.eduDepartment}}</p>
-            <p>Квалификация: {{e.eduQualification}}</p>
+            <h3>{{ex.post}}, {{ex.comName}}, ({{ex.dateStart.year}} - {{ex.dateEnd.year}})</h3>
+            <p>Описание обязанностей и достижений</p>
         </li>
         {% endfor %}
     </ul>
-
-<h2>Опыт работы</h2>
-
-<ul>
-    {% for ex in Experience %}
-    <li>
-        <h3>{{ex.post}}, {{ex.comName}}, ({{ex.dateStart.year}} - {{ex.dateEnd.year}})</h3>
-        <p>Описание обязанностей и достижений</p>
-    </li>
-    {% endfor %}
-</ul>
+{% endif %}
 
 {% endblock %}
