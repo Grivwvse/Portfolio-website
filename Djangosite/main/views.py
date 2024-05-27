@@ -1,7 +1,9 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse , HttpResponseNotFound
 from .forms import FeedbackForm
 from .models import *
+from django.views.generic import ListView, DetailView
 
 import smtplib, ssl
 from email.mime.text import MIMEText
@@ -52,9 +54,22 @@ def index(request):
 
     return render(request, 'main/index.html', context=context)
 
-def projects(request):
-    projects = Projects.objects.all()
-    return render(request, 'main/projects.html',{'title': 'My site', 'Projects': projects})
+class MainProjects(ListView):
+    project = Projects
+    template_name = 'main/projects.html'
+    context_object_name = 'Projects'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+    
+    def get_queryset(self):
+        return Projects.objects.all()
+
+
+#def projects(request):
+#    projects = Projects.objects.all()
+#    return render(request, 'main/projects.html',{'title': 'My site', 'Projects': projects})
 
 def contact(request):
     contacts = Contacts.objects.all()
@@ -73,6 +88,15 @@ def contact(request):
         feedbackForm = FeedbackForm()     
     return render(request, 'main/contact.html',{'form': feedbackForm,'title': 'My site', 'contacts': contacts[0]})
 
+class ShowProject(DetailView):
+    project = Projects
+    template_name = 'main/project.html'
+    context_object_name = 'Project'
+    slug_url_kwarg = 'project_slug'
+
+    def get_queryset(self):
+        return Projects.objects.all()
+'''
 def showProject(request, project_slug):
     project = get_object_or_404(Projects, slug = project_slug)
 
@@ -83,3 +107,4 @@ def showProject(request, project_slug):
 
     return render(request, 'main/project.html', context=context)
 
+'''

@@ -2,5 +2,9 @@
 
 {% block content %}
     <h2>{{Project.projName}}</h2>
-    <p>{{Project.description}}</p2>
+    <img src="{{Project.photo}}" alt="мое фото" />
+    <p>{{Project.description | linebreaks}}</p2>
+    <div class="flex">
+        <a href="{{p.link}}" class="btn-new">GitHub</a>
+    </div>
 {% endblock %}

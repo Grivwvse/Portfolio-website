@@ -6,7 +6,7 @@
     {% for p in Projects %}
     <li>
         <h2>{{p.projName}}</h2>
-        <p>Описание: {{p.description}}</p>
+        <p>Описание: {{p.description | truncatewords:50}}</p>
         <div class="flex">
             <a href="{{ p.get_absolute_url }}" class="btn-new">Подробнееe</a>
             <a href="{{p.link}}" class="btn-new">GitHub</a>
