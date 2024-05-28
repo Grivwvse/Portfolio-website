@@ -4,6 +4,7 @@ from django.http import HttpResponse , HttpResponseNotFound
 from .forms import FeedbackForm
 from .models import *
 from django.views.generic import ListView, DetailView
+from django.views.decorators.cache import cache_page
 
 import smtplib, ssl
 from email.mime.text import MIMEText
@@ -39,6 +40,7 @@ menu = [{'title': "Главная", 'url_name': 'home'},
         {'title': "Проекты", 'url_name': 'projects'},
         {'title': "Контакты", 'url_name': 'contact'}]
 
+#@cache_page(60 * 15)
 def index(request):
     skills = Skills.objects.all()
     education = Education.objects.all()

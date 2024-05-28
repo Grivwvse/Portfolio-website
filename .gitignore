@@ -1,3 +1,4 @@
 Djangosite/main/__pycache__
 Djangosite/db.sqlite3
 Djangosite/media
+*.djcache
