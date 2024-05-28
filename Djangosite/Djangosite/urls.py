@@ -22,6 +22,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')), # Domain Name => main application
+    path('', include('captcha.urls'))
 ]
 
 if settings.DEBUG:

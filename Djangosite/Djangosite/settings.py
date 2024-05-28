@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,7 @@ CACHES = {
         'LOCATION': os.path.join(BASE_DIR, 'Djangosite_cache')
     }
 }
+
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
+CAPTCHA_IMAGE_SIZE=[100,50]
+CAPTCHA_FONT_SIZE=30

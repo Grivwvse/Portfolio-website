@@ -1,11 +1,12 @@
 from django.db.models.query import QuerySet
-from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse , HttpResponseNotFound
+from django.shortcuts import get_object_or_404, render, redirect
+from django.http import HttpResponse , HttpResponseNotFound, HttpResponseRedirect
 from .forms import FeedbackForm
 from .models import *
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, FormView
+from django.urls import reverse, reverse_lazy
 from django.views.decorators.cache import cache_page
-
+from django.contrib import messages
 import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -73,6 +74,26 @@ class MainProjects(ListView):
 #    projects = Projects.objects.all()
 #    return render(request, 'main/projects.html',{'title': 'My site', 'Projects': projects})
 
+class ContactFormView(FormView):
+    form_class = FeedbackForm
+    template_name = 'main/contact.html'
+    #success_url = reverse_lazy('contacts')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        contacts = Contacts.objects.all()
+        context['contacts'] = contacts[0]
+        return context
+    
+    def form_valid(self, form):
+        try:
+            sendMail(form.cleaned_data)
+            messages.success(self.request, 'Ваше сообщение успешно отправлено, спасибо!')
+        except:
+            messages.error(self.request, 'Возникла ошибка при отправке сообщения, повторите позже')
+        
+        return HttpResponseRedirect(self.request.path_info)
+'''
 def contact(request):
     contacts = Contacts.objects.all()
     if request.method == 'POST':
@@ -89,7 +110,7 @@ def contact(request):
     else:
         feedbackForm = FeedbackForm()     
     return render(request, 'main/contact.html',{'form': feedbackForm,'title': 'My site', 'contacts': contacts[0]})
-
+'''
 class ShowProject(DetailView):
     project = Projects
     template_name = 'main/project.html'
