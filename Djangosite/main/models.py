@@ -26,6 +26,7 @@ class Projects(models.Model):
     class Meta:
         verbose_name = 'Проекты'
         verbose_name_plural = 'Проекты'
+        ordering = ['-id']
 
 
 class Skills(models.Model):

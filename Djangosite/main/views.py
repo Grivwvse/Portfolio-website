@@ -40,7 +40,6 @@ menu = [{'title': "Главная", 'url_name': 'home'},
         {'title': "Контакты", 'url_name': 'contact'}]
 
 def index(request):
-    person =  Person.objects.all()
     skills = Skills.objects.all()
     education = Education.objects.all()
     experience = Experience.objects.all()
@@ -55,6 +54,7 @@ def index(request):
     return render(request, 'main/index.html', context=context)
 
 class MainProjects(ListView):
+    paginate_by = 2
     project = Projects
     template_name = 'main/projects.html'
     context_object_name = 'Projects'
