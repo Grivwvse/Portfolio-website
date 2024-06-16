@@ -1,0 +1,260 @@
+:root {
+    --color1: #ffffff;
+    --color2: #f8f6f6;
+}
+
+
+.preview, footer, section{
+    padding: 2em 0px;
+}
+
+.headercontent{
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	color: #fff;
+}
+
+.preview{
+    min-height: 30em;
+    padding-top: 12em;
+	transition: all 0.5s;
+}
+
+
+.bg1{
+    background-color: var(--color1);
+}
+
+.bg2{
+    background-color: var(--color2);
+}
+
+.flexgap{
+    gap: 1em;
+}
+
+.unclickable{
+    pointer-events: none;
+}
+
+.team-back
+{
+	width:100%;
+	height:auto;
+	position:absolute;
+	top:0;
+	left:0;
+	padding:5px 15px 0 15px;
+	text-align:left;
+	background:#fff;
+	
+}
+
+.pagination
+{
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+}
+
+.team-front
+{
+	width:100%;
+	height:auto;
+	position:relative;
+	z-index:10;
+	background:#fff;
+
+	bottom:0px;
+	transition: all 0.5s ease;
+	border-bottom: 5px #ffffff solid;
+}
+
+.our-team-main:hover .team-front
+{
+	bottom:-18em;
+	transition: all 0.5s ease;
+}
+
+.our-team-main:hover
+{
+	border-color:#b8b6b6;
+	transition:0.5s;
+}
+
+#typewriter{
+	color: #fff;
+}
+
+#cursor{
+	color: #fff;
+	animation: blink 1.5s linear infinite;
+}
+
+@keyframes blink
+{
+	0% {
+		opacity: 100%;
+	}
+
+	50% {
+		opacity: 0%;
+	}
+}
+
+
+.btnScrollToTop {
+	position: fixed;
+	right: 0.1em;
+	bottom: 2em;
+	width: 4em;
+	border: none;
+	z-index: 99;
+	display: none;
+  }
+
+  .btnScrollToTop img{
+	margin: 0.2em;
+	width: 2.2em;
+	color: #b8b6b6;
+  }
+
+  .btnBack {
+	position: fixed;
+	left: 1em;
+	top: 1.3em;
+	width: 4em;
+
+  }
+
+  .btnBack img{
+	margin: 0.2em;
+	width: 2.2em;
+	color: #b8b6b6;
+  }
+
+.our-team-main
+{
+	width:100%;
+	height:auto;
+    border: 1px #b4b4b4 solid;
+	background:#fff;
+	text-align:center;
+	border-radius:10px;
+	overflow:hidden;
+	position:relative;
+	transition:0.5s;
+	margin-bottom:28px;
+
+	box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+}
+
+
+.our-team-main img
+{
+	margin-bottom:10px;
+    object-fit: fill;
+}
+
+.our-team-main h3
+{
+	font-size: 1em;
+	font-weight:700;
+}
+
+.btn-primary
+{
+	background-color: rgb(39, 24, 255);
+}
+
+footer, .preview{
+    background: rgb(26,5,122);
+    background: -moz-linear-gradient(90deg, rgba(26,5,122,1) 0%, rgba(9,9,168,1) 32%, rgba(0,224,255,1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(26,5,122,1) 0%, rgba(9,9,168,1) 32%, rgba(0,224,255,1) 100%);
+    background: linear-gradient(90deg, rgba(26,5,122,1) 0%, rgba(9,9,168,1) 32%, rgba(0,224,255,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1a057a",endColorstr="#00e0ff",GradientType=1);
+}
+
+.preview:hover {
+	filter:hue-rotate(+40deg)
+}
+
+.hide-element{
+	display: none;
+}
+
+.test{
+	background-color: lightblue;
+	width: 20px;
+	height: 30px;
+}
+
+.btn-prev{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.cookies-banner {
+	background: #444;
+	opacity: .7;
+	color: #fff;
+	padding: 6px;
+	font-size: 13px;
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+  }
+  
+  .cookies-banner button {
+	text-decoration: none;
+	background: #444;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+
+  }
+  
+  .hidden {
+	display: none;
+  }
+
+.privacy-text a {
+	color: rgb(9, 9, 212);
+	text-decoration: none;
+}
+
+
+
+/*Переопределение стилей bootstrap*/
+
+.navbar {
+	border-bottom: 1px solid #b9b8b8 ;
+}
+.navbar-collapse{
+    justify-content: center;
+	
+}
+
+.list-group{
+    display: inline-block;
+    gap: 0.5em;
+    margin: auto;
+}
+
+.list-group-item{
+    border-radius: 0.5em;
+    background-color: rgb(213, 219, 219);
+}
+
+.btn-contact{
+	width:100%
+}
+
+.img-social {
+    width: 250%;   /* Ключ к масштабированию */
+    height: auto;  /* Поддержка пропорций */
+}

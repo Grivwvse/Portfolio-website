@@ -1,51 +1,276 @@
 {% extends 'main/base.html' %}
-
+{% load static %}
 {% block content %}
 
-{% if Person.photo %}
-    <div class="imgcontainer">
-        <img src="{{Person.photo.url}}" alt="мое фото" />
-        <div>
-            <h2>Про меня</h2>
-            <p>Меня зовут {{Person.fullName}}
-            <p>{{Person.about | linebreaks}}</p>
+
+
+    <section class="preview">
+        <div class="container">
+            <div class="row-5">
+                <div class="col-12">
+                    <div>
+                        <h1 class="text-center text-white">{{SiteSettings.previewS}}</h1>
+                        <p1></p1>
+                    </div>
+                    <div class="headercontent mt-5">
+                      <h1 class="mt-2"><span id="typewriter" class="text-white"></span><span id="cursor">|</span></h1>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <section class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center text-uppercase text-secondary">Про меня</h2>
+                </div>
+            </div>
+            {% if Person.name and Person.about and  Person.photo %}
+            <div class="row">
+                <div class="col-xl-9 col-lg-12">
+                    <h4>Меня зовут {{Person.name}}</h4>
+                    <p>{{Person.about | linebreaks}}</p>
+                </div>
+                <div class="col-xl-3 col-lg-12 text-center">
+                    <img src="{{Person.photo.url}}" alt="Мое Фото" class="img-fluid">
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="bg2">
+        <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <h2 class="text-center text-uppercase text-secondary">Навыки</h2>
+              </div>
+            </div>
+            {% if Backend is not None or Frontend is not None %}
+            <div class="row">
+              <h5 class="text-center mt-4">Hard skills</h5>
+              <div class="col-md-6 col-sm-12">
+                <h5 class="text-center">Backend</h5>
+                <hr class="mx-5">
+                <div class="row mx-0 mx-md-5">
+                  <ul class="list-group d-flex flex-row flex-wrap">
+                    {% for b in Backend %}
+                    <li class="list-group-item text-center list-group-item-dark">{{b}}</li>
+                    {% endfor %}
+                    <li class="list-group-item text-center list-group-item-dark">C#</li>
+                    <li class="list-group-item  text-center list-group-item-dark">Entity framework</li>
+                    <li class="list-group-item  text-center list-group-item-dark">C++ (14)</li>
+                    <li class="list-group-item  text-center list-group-item-dark">MFC</li>
+                    <li class="list-group-item  text-center list-group-item-dark">STL</li>
+                    <li class="list-group-item  text-center list-group-item-dark">Python</li>
+                    <li class="list-group-item  text-center list-group-item-dark">Django</li>
+                  </ul>
+                </div>
+              </div>
+              
+
+              <div class="col-md-6 col-sm-12">
+                <h5 class="text-center">Frontend</h5>
+                <hr class="mx-5">
+                <div class="row mx-0 mx-md-5">
+                  <ul class="list-group d-flex flex-row flex-wrap">
+                    {% for f in Frontend %}
+                    <li class="list-group-item text-center list-group-item-dark">{{f}}</li>
+                    {% endfor %}
+                    <li class="list-group-item text-center list-group-item-dark">HTML</li>
+                    <li class="list-group-item  text-center list-group-item-dark">CSS</li>
+                    <li class="list-group-item  text-center list-group-item-dark">Bootstrap</li>
+                  </ul>
+                </div>
+              </div>
+              {% endif %}
+
+              <h5 class="text-center mt-4">Environment</h5>
+              {% if Linux is not None or Windows is not None %}
+              <div class="col-md-6 col-sm-12">
+                <h5 class="text-center">Linux/Debian</h5>
+                <hr class="mx-5">
+                <div class="row mx-0 mx-md-5">
+                  <ul class="list-group d-flex flex-row flex-wrap">
+                    {% for l in Linux %}
+                    <li class="list-group-item text-center list-group-item-dark">{{l}}</li>
+                    {% endfor %}
+                    <li class="list-group-item text-center list-group-item-dark">Vim</li>
+                    <li class="list-group-item  text-center list-group-item-dark">gcc</li>
+                    <li class="list-group-item  text-center list-group-item-dark">llvm clang</li>
+                    <li class="list-group-item  text-center list-group-item-dark">VS Code</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-12">
+                <h5 class="text-center">Windows</h5>
+                <hr class="mx-5">
+                <div class="row mx-0 mx-md-5">
+                  <ul class="list-group d-flex flex-row flex-wrap">
+                    {% for w in Windows %}
+                    <li class="list-group-item text-center list-group-item-dark">{{w}}</li>
+                    {% endfor %}
+                    <li class="list-group-item text-center list-group-item-dark">Visual Studio</li>
+                    <li class="list-group-item  text-center list-group-item-dark">VS Code</li>
+                    <li class="list-group-item  text-center list-group-item-dark">MSVC</li>
+                    <li class="list-group-item  text-center list-group-item-dark">llvm clang</li>
+                  </ul>
+                </div>
+              </div>
+              {% endif %}
+
+              {% if Virtualization is not None or Databases is not None %}
+              <div class="col-md-6 col-sm-12">
+                <h5 class="text-center mt-4">Databases</h5>
+                <hr class="mx-5">
+                <div class="row mx-0 mx-md-5">
+                  <ul class="list-group d-flex flex-row flex-wrap">
+                    {% for d in Databases %}
+                    <li class="list-group-item text-center list-group-item-dark">{{d}}</li>
+                    {% endfor %}
+                    <li class="list-group-item text-center list-group-item-dark">MS SQL</li>
+                    <li class="list-group-item  text-center list-group-item-dark">SQL Lite</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-12">
+                <h5 class="text-center mt-4">Virtualization</h5>
+                <hr class="mx-5">
+                <div class="row mx-0 mx-md-5">
+                  <ul class="list-group d-flex flex-row flex-wrap">
+                    {% for v in Virtualization %}
+                    <li class="list-group-item text-center list-group-item-dark">{{v}}</li>
+                    {% endfor %}
+                    <li class="list-group-item text-center list-group-item-dark">HyperV</li>
+                    <li class="list-group-item  text-center list-group-item-dark">VirtualBox</li>
+                    <li class="list-group-item  text-center list-group-item-dark">Vmware</li>
+                  </ul>
+                </div>
+              </div>
+              {% endif %}
+              {% if Softskills is not None %}
+              <h5 class="text-center mt-4">Soft skills</h5>
+              <div class="col"></div>
+              <div class="col-md-6 col-sm-12">
+                <hr class="mx-5">
+                <div class="row mx-0 mx-md-5 justify-content-center mb-4">
+                  <ul class="list-group d-flex flex-row flex-wrap justify-content-center">
+                    {% for s in Softskills %}
+                    <li class="list-group-item text-center list-group-item-dark">{{s}}</li>
+                    {% endfor %}
+                    <li class="list-group-item text-center list-group-item-dark">Коммуникабельность</li>
+                    <li class="list-group-item  text-center list-group-item-dark">Предприимчивость</li>
+                    <li class="list-group-item  text-center list-group-item-dark">Целеустремленность</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col"></div>
+            </div>
+            {% endif %}
+
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+                <h2 class="text-center text-uppercase text-secondary">Опыт</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              {% if Education %}
+              <h5 class="text-center">Образование</h5>
+
+              <div class="row mx-0 mx-md-5 mb-4">
+                <div class="list-group justify-content-center d-flex ">
+                  {% for e in Education %}
+                  <div href="#" class="list-group-item unclickable" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                      <h5 class="mb-1">{{e.name}}</h5>
+                      <small>{{e.dateStart.year}} - {{e.dateEnd.year}}</small>
+                    </div>
+                    <p class="mb-1">{{e.department}}</p>
+                    <small>{{e.info}}</small>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+              {% endif %}
+            </div>
+
+            {% if Experience %}
+            <div class="col-md-6 col-sm-12">
+              <h5 class="text-center">Работа</h5>
+              <div class="row mx-0 mx-md-5 mb-4">
+                <div class="list-group justify-content-center d-flex ">
+                  {% for e in Experience %}
+                  <div href="#" class="list-group-item unclickable" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                      <h5 class="mb-1">{{e.company}}</h5>
+                      <small>{{e.dateStart.year}} - {{e.dateEnd.year}}</small>
+                    </div>
+                    <p class="mb-1">{{e.post}}</p>
+                    <small>{{e.info}}</small>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+
+            </div>
+            {% endif %}
+
+          </div>
+
+        </div>
+    </section>
+
+    <div class="btnScrollToTop" data-scroll="up" type="button">
+      <img src="{% static 'main/images/chevron-double-up.svg' %}" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-up-circle-fill" alt="Scroll to top" />
     </div>
-{% endif %}
 
-{% if Skills %}
-    <h2>Мои навыки</h2>
-    <ul>
-        {% for s in Skills %}
-        <li>{{s.skiName}}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
+    <div class="cookies-banner hidden">
+      Оставаясь на данном сайте, вы соглашаетесь с политикой конфиденциальности и с использованием файлов cookie.
+      <button class="mx-1 mx-md-3 my-1 text-white">✖</button>
+    </div>
 
-{% if Education %}
-    <h2>Образование</h2>
-        <ul>
-            {% for e in Education %}
-            <li>
-                <h3>{{e.eduName}} ({{e.dateStart.year}} - {{e.dateEnd.year}})</h3>
-                <p>Кафедра: {{e.eduDepartment}}</p>
-                <p>Квалификация: {{e.eduQualification}}</p>
-            </li>
-            {% endfor %}
-        </ul>
-{% endif %}
+    <script>
+      const btnScrollToTop = document.querySelector(".btnScrollToTop");
 
-{% if Experience %}
-    <h2>Опыт работы</h2>
+      btnScrollToTop.addEventListener("click", e => {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "smooth"
+        });
+      });
 
-    <ul>
-        {% for ex in Experience %}
-        <li>
-            <h3>{{ex.post}}, {{ex.comName}}, ({{ex.dateStart.year}} - {{ex.dateEnd.year}})</h3>
-            <p>Описание обязанностей и достижений</p>
-        </li>
-        {% endfor %}
-    </ul>
-{% endif %}
+      window.addEventListener('scroll', e => {
+        btnScrollToTop.style.display = window.scrollY > 20 ? 'block' : 'none';
+      });
+    </script>
+    <script>
+      function scrollToTop()
+      {
+        window.scrollTo(0,0);
+      }
+    </script>
+    <script data-dwords="{{ SiteSettings.previewD }}">
+      const data = document.currentScript.dataset;
+      var phrases =  data.dwords;
+      phrases = phrases.split(', ');
+      let typetime = 120;
+      let deletetime = 80;
+      let fullwtime = 2000;
+      let nulltime = 100;
+    </script>
+    <script src="{% static 'main/js/coociesbanner.js' %}"></script>
+    <script src="{% static 'main/js/TypeWriter.js' %}"></script>
+
 
 {% endblock %}

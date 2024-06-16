@@ -2,20 +2,21 @@ from django.db import models
 from django.urls import reverse
 
 class Person(models.Model):
-    fullName = models.CharField(max_length=255, verbose_name="ФИО")
+    name = models.CharField(max_length=255, verbose_name="ФИО")
     about = models.TextField(verbose_name="Обо мне")
-    post = models.CharField(max_length=255, verbose_name="Должность")
     photo = models.ImageField(upload_to="photos/", verbose_name="Фото")
-    location = models.CharField(max_length=255, verbose_name="Локация")
+    active = models.BooleanField(verbose_name="Активно")
 
     class Meta:
         verbose_name = 'Вы'
         verbose_name_plural = 'Вы'
 
 class Projects(models.Model):
-    preson = models.ForeignKey(Person,on_delete=models.CASCADE)
+    person = models.ForeignKey(Person,on_delete=models.PROTECT)
     projName = models.CharField(max_length=255, verbose_name="Имя проекта")
-    description = models.TextField(verbose_name="Описание проекта")
+    desc = models.TextField(verbose_name="Описание проекта")
+    tech = models.TextField(verbose_name="Используемые технологии")
+    comment = models.TextField(verbose_name="Комментарий")
     link = models.TextField(verbose_name="Ссылка")
     photo = models.ImageField(upload_to="photos/projects", verbose_name="Фото", null=True, blank=True)
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
@@ -30,17 +31,24 @@ class Projects(models.Model):
 
 
 class Skills(models.Model):
-    preson = models.ForeignKey(Person,on_delete=models.CASCADE)
-    skiName = models.TextField(verbose_name="Наименование навыка")
+    person = models.ForeignKey(Person,on_delete=models.PROTECT)
+    backend = models.TextField(verbose_name="Бэкенд", null=True, blank=True)
+    frontend = models.TextField(verbose_name="Фронтенд", blank=True)
+    linux = models.TextField(verbose_name="ПО Линукс", blank=True)
+    windows = models.TextField(verbose_name="ПО Виндовс", blank=True)
+    databases = models.TextField(verbose_name="Базы данных", blank=True)
+    virtualization = models.TextField(verbose_name="Виртуализация", blank=True)
+    softskills = models.TextField(verbose_name="СофтСкиллс", blank=True)
 
     class Meta:
         verbose_name = 'Навыки'
         verbose_name_plural = 'Навыки'
 
 class Experience(models.Model):
-    preson = models.ForeignKey(Person,on_delete=models.CASCADE)
-    comName = models.TextField(verbose_name="Компания")
+    person = models.ForeignKey(Person,on_delete=models.PROTECT)
+    company = models.TextField(verbose_name="Компания")
     post = models.CharField(max_length=255, verbose_name="Должность")
+    info = models.TextField(verbose_name="Обязанности")
     dateStart = models.DateField(verbose_name="Начало")
     dateEnd = models.DateField(verbose_name="Конец")
 
@@ -50,10 +58,10 @@ class Experience(models.Model):
 
 
 class Education(models.Model):
-    preson = models.ForeignKey(Person,on_delete=models.CASCADE)
-    eduName = models.TextField(verbose_name="Учебн. учреждение")
-    eduDepartment = models.TextField(verbose_name="Факультет", null=True, blank=True)
-    eduQualification = models.TextField(verbose_name="Квалификация", null=True, blank=True)
+    person = models.ForeignKey(Person,on_delete=models.PROTECT)
+    name = models.TextField(verbose_name="Учебн. учреждение")
+    department = models.TextField(verbose_name="Факультет")
+    info = models.TextField(verbose_name="Что освоили")
     dateStart = models.DateField(verbose_name="Начало")
     dateEnd = models.DateField(verbose_name="Конец")
 
@@ -62,7 +70,7 @@ class Education(models.Model):
         verbose_name_plural = 'Образование'
         
 class MailNotification(models.Model):
-    preson = models.ForeignKey(Person,on_delete=models.CASCADE)
+    person = models.ForeignKey(Person,on_delete=models.PROTECT)
     mailLogin = models.CharField(max_length=255, verbose_name="Логин")
     mailPassword = models.CharField(max_length=255,verbose_name="Пароль")
     isActive = models.BooleanField(default=False, verbose_name="Активно")
@@ -74,12 +82,23 @@ class MailNotification(models.Model):
         verbose_name_plural = 'Почтовое оповещение'
 
 class Contacts(models.Model):
-    preson = models.ForeignKey(Person,on_delete=models.CASCADE)
+    person = models.ForeignKey(Person,on_delete=models.PROTECT)
     mail = models.CharField(max_length=255, verbose_name="Почта")
     github = models.TextField(verbose_name="Github")
-    telegram = models.TextField(verbose_name="Telegram", null=True, blank=True)
-    phone = models.CharField(max_length=255, verbose_name="Телефон", null=True, blank=True)
+    telegram = models.TextField(verbose_name="Telegram")
+    location = models.CharField(max_length=255, verbose_name="Город")
+    policy = models.TextField(verbose_name="Политика конфиденциальности")
 
     class Meta:
         verbose_name = 'Контакт'
         verbose_name_plural = 'Контакты'
+
+class Site_settings(models.Model):
+    siteName = models.TextField(verbose_name="Имя сайта")
+    previewS = models.TextField(verbose_name="Превью статический текст")
+    previewD = models.TextField(verbose_name="Превью динамический текст")
+    footerText = models.TextField(verbose_name="Текст футера")
+
+    class Meta:
+        verbose_name = 'Настройки сайта'
+        verbose_name_plural = 'Настройки сайта'

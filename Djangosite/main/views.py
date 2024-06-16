@@ -11,6 +11,11 @@ import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+def split_words(self):
+        if self == "":
+            return None
+        return self.split(", ")
+
 def decrypt_password(encrypted_password):
     decrypted_password = ""
     for char in encrypted_password:
@@ -38,18 +43,25 @@ def sendMail(feedbackForm):
 
     
 menu = [{'title': "Главная", 'url_name': 'home'},
-        {'title': "Проекты", 'url_name': 'projects'},
+        {'title': "Портфолио", 'url_name': 'projects'},
         {'title': "Контакты", 'url_name': 'contact'}]
 
 #@cache_page(60 * 15)
 def index(request):
-    skills = Skills.objects.all()
-    education = Education.objects.all()
-    experience = Experience.objects.all()
-    
+    current_person = Person.objects.filter(active=True).first()
+    skills = Skills.objects.filter(person=current_person.pk).first()
+    education = Education.objects.order_by('-dateEnd').filter(person=current_person.pk)
+    experience = Experience.objects.order_by('-dateEnd').filter(person=current_person.pk)
+
     context = {
         'title': 'My site', 
-        'Skills': skills, 
+        'Frontend': split_words(skills.frontend), 
+        'Backend': split_words(skills.backend), 
+        'Linux': split_words(skills.linux), 
+        'Windows': split_words(skills.windows), 
+        'Databases': split_words(skills.databases), 
+        'Virtualization': split_words(skills.virtualization), 
+        'Softskills': split_words(skills.softskills), 
         'Education':education, 
         'Experience' :experience,
     }
