@@ -1,10 +1,50 @@
 {% extends 'main/base.html' %}
-
+{% load static %}
 {% block content %}
-    <h2>{{Project.projName}}</h2>
-    <img src="{{Project.photo}}" alt="мое фото" />
-    <p>{{Project.description | linebreaks}}</p2>
-    <div class="flex">
-        <a href="{{p.link}}" class="btn-new">GitHub</a>
+
+
+<section  class="mx-1 mb-mx-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-3">
+                <h2 class="text-center text-uppercase text-secondary mt-5">Разработка сайта портфолио DJANGO</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div>
+                    <img src="{{Project.photo.url}}" class="img-fluid" alt="Photo-Project">
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h3 class="text-center">Описание проекта</h3>
+                <p class="lh-1">{{Project.desc}}</p>
+            </div>
+        </div>
+
+        <div class="row my-3">
+            <div class="col-md-6 col-sm-12">
+                <h3 class="text-center">Использованные технологии</h3>
+                
+                <p class="lh-1">{{Project.tech}}</p>
+            </div>
+                
+            <div class="col-md-6 col-sm-12">
+                <h3 class="text-center">Комментарии автора</h3>
+                <p class="lh-1">{{Project.comment}}</p>
+            </div>
+        </div>
     </div>
+
+    <div class="text-center">
+        <a class="btn btn-primary mx-1 " href="{{Project.link}}" role="button">GitHub</a>
+    </div>
+
+</section>
+
+<div class="btnBack mb-4 mb-md-0 mt-0 mt-md-5" type="button">
+  <img src="{% static 'main/images/chevron-double-left.svg' %}" fill="currentColor" onclick="javascript:history.back(); return false;" viewBox="0 0 16 16" class="bi bi-arrow-up-circle-fill" alt="Scroll to top" />
+</div>
+
+
 {% endblock %}

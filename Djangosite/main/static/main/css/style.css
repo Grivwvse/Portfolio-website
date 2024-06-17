@@ -21,7 +21,6 @@
 	transition: all 0.5s;
 }
 
-
 .bg1{
     background-color: var(--color1);
 }
@@ -33,6 +32,7 @@
 .flexgap{
     gap: 1em;
 }
+
 
 .unclickable{
     pointer-events: none;
@@ -134,6 +134,13 @@
 	width: 2.2em;
 	color: #b8b6b6;
   }
+
+.error-field{
+	color: red;
+	text-decoration: none;
+}
+
+
 
 .our-team-main
 {

@@ -21,7 +21,7 @@ def decrypt_password(encrypted_password):
     for char in encrypted_password:
         decrypted_password += chr(ord(char) - 6)
     return decrypted_password
-
+ 
 def sendMail(feedbackForm):
     mailNotification = MailNotification.objects.filter(isActive = True)
 
@@ -69,7 +69,7 @@ def index(request):
     return render(request, 'main/index.html', context=context)
 
 class MainProjects(ListView):
-    paginate_by = 2
+    paginate_by = 6
     project = Projects
     template_name = 'main/projects.html'
     context_object_name = 'Projects'
@@ -79,7 +79,8 @@ class MainProjects(ListView):
         return context
     
     def get_queryset(self):
-        return Projects.objects.all()
+        current_person = Person.objects.filter(active=True).first()
+        return Projects.objects.order_by('pk').filter(person=current_person.pk)
 
 
 #def projects(request):
@@ -93,12 +94,15 @@ class ContactFormView(FormView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        contacts = Contacts.objects.all()
-        context['contacts'] = contacts[0]
+        current_person = Person.objects.filter(active=True).first()
+        contacts = Contacts.objects.filter(person=current_person.pk).first()
+        context['contacts'] = contacts
         return context
     
     def form_valid(self, form):
+        print(123)
         try:
+            print(123)
             sendMail(form.cleaned_data)
             messages.success(self.request, 'Ваше сообщение успешно отправлено, спасибо!')
         except:

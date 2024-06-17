@@ -2,38 +2,68 @@
 
 {% block content %}
 
-<ul>
-    {% for p in Projects %}
-    <li>
-        <h2>{{p.projName}}</h2>
-        <p>Описание: {{p.description | truncatewords:50}}</p>
-        <div class="flex">
-            <a href="{{ p.get_absolute_url }}" class="btn-new">Подробнееe</a>
-            <a href="{{p.link}}" class="btn-new">GitHub</a>
+<section  class="mx-1 mb-mx-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="text-center text-uppercase text-secondary mt-5">Мое Портфолио</h2>
+            </div>
         </div>
-    </li>
-    {% endfor %}
-</ul>
-
-<hr/>
-<div class="pagination">
-
-    {% if page_obj.has_previous %}
-    <a href="?page={{page_obj.previous_page_number}}">&laquo;</a>
-    {% endif %}
-
-    {% for p in paginator.page_range %}
-        {% if page_obj.number == p %}
-        <a class="active" href="?page={{p}}">{{p}}</a>
-        {%  elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
-        <a href="?page={{p}}">{{p}}</a>
+        {% if Projects %}
+        <div class="row">
+          {% for p in Projects %}
+          <div class="col-md-4 col-sm-12">         
+            <div class="our-team-main">
+              <div class="team-front">
+                <img src="{{p.photo.url}}" class="img-fluid" />
+                <h3>{{p.projName}}</h3>
+               </div>
+              
+              <div class="team-back">
+                <span>{{p.desc | linebreaks | truncatewords:47 }}</span>
+                <div class="mt-1 mt-sm-4 btn-prev">
+                  <a class="btn btn-primary mx-1" href="{{ p.get_absolute_url }}" role="button">Подробнее</a>
+                  <a class="btn btn-primary mx-1 " href="{{p.link}}" role="button">GitHub</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
         {% endif %}
-    {% endfor %}
+    </div>
+</section>
 
-    {% if page_obj.has_next %}
-    <a href="?page={{page_obj.next_page_number}}">&raquo;</a>
-    {% endif %}
+<section>
+  <div class="pagination">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        {% endif %}
 
-</div>
+        {% for p in paginator.page_range %}
+        {% if page_obj.number == p %}
+        <li class="page-item"><a class="page-link active" href="?page={{p}}">{{p}}</a></li>
+        {%  elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+        <li class="page-item"><a class="page-link" href="?page={{p}}">{{p}}</a></li>
+        {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+</section>
 
 {% endblock %}
