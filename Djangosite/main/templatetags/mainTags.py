@@ -3,6 +3,7 @@ from main.models import Person
 from main.models import Site_settings
 from main.views import menu
 
+
 register = template.Library()
 
 @register.simple_tag()

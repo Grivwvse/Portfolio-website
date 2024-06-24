@@ -8,7 +8,7 @@
         <div class="col-4">
 
         </div>
-          <div class="col-4 mb-3">
+          <div class="mb-3 col-md-4 col-sm-12">
               <h2 class="text-center text-uppercase text-secondary mt-5">Связаться со сной</h2>
           </div>
 
@@ -139,13 +139,16 @@
   };
 </script>
 
-<script>
+<script data-email="{{contacts.mail}}">
+  const data = document.currentScript.dataset;
+  var email_to_copy = data.email;
   document.body.onclick = (event) => {
 const elem = event.target;
-// console.log(elem);
+ console.log(elem);
 if (elem.classList.contains('section-symbol')) {
     console.log(elem);
-    navigator.clipboard.writeText('Griwvwse@mail.ru')
+    console.log(email_to_copy);
+    navigator.clipboard.writeText(email_to_copy)
         .then(() => {
             document.querySelector('.inform-user-copy').innerHTML = 'Email Скопирован в буффер!';
         })

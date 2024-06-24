@@ -31,7 +31,7 @@ class Projects(models.Model):
 
 
 class Skills(models.Model):
-    person = models.ForeignKey(Person,on_delete=models.PROTECT)
+    person = models.ForeignKey(Person,on_delete=models.PROTECT, related_name="skills")
     backend = models.TextField(verbose_name="Бэкенд", null=True, blank=True)
     frontend = models.TextField(verbose_name="Фронтенд", blank=True)
     linux = models.TextField(verbose_name="ПО Линукс", blank=True)
@@ -45,7 +45,7 @@ class Skills(models.Model):
         verbose_name_plural = 'Навыки'
 
 class Experience(models.Model):
-    person = models.ForeignKey(Person,on_delete=models.PROTECT)
+    person = models.ForeignKey(Person,on_delete=models.PROTECT, related_name="experience")
     company = models.TextField(verbose_name="Компания")
     post = models.CharField(max_length=255, verbose_name="Должность")
     info = models.TextField(verbose_name="Обязанности")
@@ -58,7 +58,7 @@ class Experience(models.Model):
 
 
 class Education(models.Model):
-    person = models.ForeignKey(Person,on_delete=models.PROTECT)
+    person = models.ForeignKey(Person,on_delete=models.PROTECT, related_name="education")
     name = models.TextField(verbose_name="Учебн. учреждение")
     department = models.TextField(verbose_name="Факультет")
     info = models.TextField(verbose_name="Что освоили")

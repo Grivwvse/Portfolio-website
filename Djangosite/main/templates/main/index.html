@@ -50,73 +50,55 @@
             </div>
             {% if Backend is not None or Frontend is not None %}
             <div class="row">
-              <h5 class="text-center mt-4">Hard skills</h5>
+              <h5 class="text-center mt-5 mt-md-4">Hard skills</h5>
               <div class="col-md-6 col-sm-12">
-                <h5 class="text-center">Backend</h5>
+                <h5 class="text-center mt-4">Backend</h5>
                 <hr class="mx-5">
                 <div class="row mx-0 mx-md-5">
-                  <ul class="list-group d-flex flex-row flex-wrap">
+                  <ul class="list-group d-flex flex-row flex-wrap justify-content-center justify-content-md-start">
                     {% for b in Backend %}
                     <li class="list-group-item text-center list-group-item-dark">{{b}}</li>
                     {% endfor %}
-                    <li class="list-group-item text-center list-group-item-dark">C#</li>
-                    <li class="list-group-item  text-center list-group-item-dark">Entity framework</li>
-                    <li class="list-group-item  text-center list-group-item-dark">C++ (14)</li>
-                    <li class="list-group-item  text-center list-group-item-dark">MFC</li>
-                    <li class="list-group-item  text-center list-group-item-dark">STL</li>
-                    <li class="list-group-item  text-center list-group-item-dark">Python</li>
-                    <li class="list-group-item  text-center list-group-item-dark">Django</li>
                   </ul>
                 </div>
               </div>
               
 
               <div class="col-md-6 col-sm-12">
-                <h5 class="text-center">Frontend</h5>
+                <h5 class="text-center mt-4">Frontend</h5>
                 <hr class="mx-5">
                 <div class="row mx-0 mx-md-5">
-                  <ul class="list-group d-flex flex-row flex-wrap">
+                  <ul class="list-group d-flex flex-row flex-wrap justify-content-center justify-content-md-start">
                     {% for f in Frontend %}
                     <li class="list-group-item text-center list-group-item-dark">{{f}}</li>
                     {% endfor %}
-                    <li class="list-group-item text-center list-group-item-dark">HTML</li>
-                    <li class="list-group-item  text-center list-group-item-dark">CSS</li>
-                    <li class="list-group-item  text-center list-group-item-dark">Bootstrap</li>
                   </ul>
                 </div>
               </div>
               {% endif %}
 
-              <h5 class="text-center mt-4">Environment</h5>
+              <h5 class="text-center mt-5 mt-md-4">Environment</h5>
               {% if Linux is not None or Windows is not None %}
               <div class="col-md-6 col-sm-12">
-                <h5 class="text-center">Linux/Debian</h5>
+                <h5 class="text-center mt-4 ">Linux/Debian</h5>
                 <hr class="mx-5">
                 <div class="row mx-0 mx-md-5">
-                  <ul class="list-group d-flex flex-row flex-wrap">
+                  <ul class="list-group d-flex flex-row flex-wrap justify-content-center justify-content-md-start">
                     {% for l in Linux %}
                     <li class="list-group-item text-center list-group-item-dark">{{l}}</li>
                     {% endfor %}
-                    <li class="list-group-item text-center list-group-item-dark">Vim</li>
-                    <li class="list-group-item  text-center list-group-item-dark">gcc</li>
-                    <li class="list-group-item  text-center list-group-item-dark">llvm clang</li>
-                    <li class="list-group-item  text-center list-group-item-dark">VS Code</li>
                   </ul>
                 </div>
               </div>
 
               <div class="col-md-6 col-sm-12">
-                <h5 class="text-center">Windows</h5>
+                <h5 class="text-center mt-4 ">Windows</h5>
                 <hr class="mx-5">
                 <div class="row mx-0 mx-md-5">
-                  <ul class="list-group d-flex flex-row flex-wrap">
+                  <ul class="list-group d-flex flex-row flex-wrap justify-content-center justify-content-md-start">
                     {% for w in Windows %}
                     <li class="list-group-item text-center list-group-item-dark">{{w}}</li>
                     {% endfor %}
-                    <li class="list-group-item text-center list-group-item-dark">Visual Studio</li>
-                    <li class="list-group-item  text-center list-group-item-dark">VS Code</li>
-                    <li class="list-group-item  text-center list-group-item-dark">MSVC</li>
-                    <li class="list-group-item  text-center list-group-item-dark">llvm clang</li>
                   </ul>
                 </div>
               </div>
@@ -127,12 +109,10 @@
                 <h5 class="text-center mt-4">Databases</h5>
                 <hr class="mx-5">
                 <div class="row mx-0 mx-md-5">
-                  <ul class="list-group d-flex flex-row flex-wrap">
+                  <ul class="list-group d-flex flex-row flex-wrap justify-content-center justify-content-md-start">
                     {% for d in Databases %}
                     <li class="list-group-item text-center list-group-item-dark">{{d}}</li>
                     {% endfor %}
-                    <li class="list-group-item text-center list-group-item-dark">MS SQL</li>
-                    <li class="list-group-item  text-center list-group-item-dark">SQL Lite</li>
                   </ul>
                 </div>
               </div>
@@ -141,30 +121,24 @@
                 <h5 class="text-center mt-4">Virtualization</h5>
                 <hr class="mx-5">
                 <div class="row mx-0 mx-md-5">
-                  <ul class="list-group d-flex flex-row flex-wrap">
+                  <ul class="list-group d-flex flex-row flex-wrap justify-content-center justify-content-md-start">
                     {% for v in Virtualization %}
                     <li class="list-group-item text-center list-group-item-dark">{{v}}</li>
                     {% endfor %}
-                    <li class="list-group-item text-center list-group-item-dark">HyperV</li>
-                    <li class="list-group-item  text-center list-group-item-dark">VirtualBox</li>
-                    <li class="list-group-item  text-center list-group-item-dark">Vmware</li>
                   </ul>
                 </div>
               </div>
               {% endif %}
               {% if Softskills is not None %}
-              <h5 class="text-center mt-4">Soft skills</h5>
+              <h5 class="text-center mt-5 mt-md-4">Soft skills</h5>
               <div class="col"></div>
               <div class="col-md-6 col-sm-12">
                 <hr class="mx-5">
-                <div class="row mx-0 mx-md-5 justify-content-center mb-4">
+                <div class="row mx-0 mx-md-5 justify-content-center">
                   <ul class="list-group d-flex flex-row flex-wrap justify-content-center">
                     {% for s in Softskills %}
                     <li class="list-group-item text-center list-group-item-dark">{{s}}</li>
                     {% endfor %}
-                    <li class="list-group-item text-center list-group-item-dark">Коммуникабельность</li>
-                    <li class="list-group-item  text-center list-group-item-dark">Предприимчивость</li>
-                    <li class="list-group-item  text-center list-group-item-dark">Целеустремленность</li>
                   </ul>
                 </div>
               </div>
@@ -230,7 +204,7 @@
         </div>
     </section>
 
-    <div class="btnScrollToTop" data-scroll="up" type="button">
+    <div class="btnScrollToTop mb-3" data-scroll="up" type="button">
       <img src="{% static 'main/images/chevron-double-up.svg' %}" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-up-circle-fill" alt="Scroll to top" />
     </div>
 

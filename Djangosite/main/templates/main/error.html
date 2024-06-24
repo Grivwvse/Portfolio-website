@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="jumbotron text-center mt-5">
+    <h1>Oops, something seems to have gone wrong.</h1> 
+  </div>
+    
+  <div class="container">
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-sm-4 text-center">
+        <h3>CURRENT ERROR</h3>
+        <p>{{message}}</p>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

@@ -7,16 +7,16 @@
     <div class="container">
         <div class="row">
             <div class="col-12 mb-3">
-                <h2 class="text-center text-uppercase text-secondary mt-5">Разработка сайта портфолио DJANGO</h2>
+                <h2 class="text-center text-uppercase text-secondary mt-5">{{Project.projName}}</h2>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-6 col-sm-12 mt-3 mt-md-0">
                 <div>
                     <img src="{{Project.photo.url}}" class="img-fluid" alt="Photo-Project">
                 </div>
             </div>
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-6 col-sm-12 mt-3 mt-md-0">
                 <h3 class="text-center">Описание проекта</h3>
                 <p class="lh-1">{{Project.desc}}</p>
             </div>
@@ -37,6 +37,7 @@
     </div>
 
     <div class="text-center">
+        <a class="btn btn-primary mx-1 " onclick="javascript:history.back(); return false;" role="button">Назад</a>
         <a class="btn btn-primary mx-1 " href="{{Project.link}}" role="button">GitHub</a>
     </div>
 

@@ -6,10 +6,12 @@ from .models import *
 from django.views.generic import ListView, DetailView, FormView
 from django.urls import reverse, reverse_lazy
 from django.views.decorators.cache import cache_page
+from django.core.cache import cache
 from django.contrib import messages
 import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from django.db.models import Prefetch
 
 def split_words(self):
         if self == "":
@@ -48,10 +50,22 @@ menu = [{'title': "Главная", 'url_name': 'home'},
 
 #@cache_page(60 * 15)
 def index(request):
-    current_person = Person.objects.filter(active=True).first()
-    skills = Skills.objects.filter(person=current_person.pk).first()
-    education = Education.objects.order_by('-dateEnd').filter(person=current_person.pk)
-    experience = Experience.objects.order_by('-dateEnd').filter(person=current_person.pk)
+    person = Person.objects.filter(active=True).    prefetch_related(
+        Prefetch('skills', queryset=Skills.objects.all()),
+        Prefetch('education', queryset=Education.objects.order_by('-dateEnd')),
+        Prefetch('experience', queryset=Experience.objects.order_by('-dateEnd'))
+        ).first()
+    
+    if not person:
+        return render(request, 'main/error.html', {'message': 'No active person found'})
+
+    skills = person.skills.first()
+    experience = person.experience.all()
+    education = person.education.all()
+    #------
+    #skills = Skills.objects.filter(person = person.pk).first()
+    #experience = Experience.objects.order_by('-dateEnd').filter(person=person.pk)
+    #education = Education.objects.order_by('-dateEnd').filter(person=person.pk)
 
     context = {
         'title': 'My site', 
@@ -62,12 +76,13 @@ def index(request):
         'Databases': split_words(skills.databases), 
         'Virtualization': split_words(skills.virtualization), 
         'Softskills': split_words(skills.softskills), 
-        'Education':education, 
+        'Education': education, 
         'Experience' :experience,
     }
 
     return render(request, 'main/index.html', context=context)
 
+#@cache_page(60 * 15)
 class MainProjects(ListView):
     paginate_by = 6
     project = Projects
@@ -90,7 +105,6 @@ class MainProjects(ListView):
 class ContactFormView(FormView):
     form_class = FeedbackForm
     template_name = 'main/contact.html'
-    #success_url = reverse_lazy('contacts')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -109,24 +123,7 @@ class ContactFormView(FormView):
             messages.error(self.request, 'Возникла ошибка при отправке сообщения, повторите позже')
         
         return HttpResponseRedirect(self.request.path_info)
-'''
-def contact(request):
-    contacts = Contacts.objects.all()
-    if request.method == 'POST':
-        feedbackForm = FeedbackForm(request.POST)
-        if feedbackForm.is_valid():
-            if '@' in feedbackForm.cleaned_data['mail']:
-                try:
-                    sendMail(feedbackForm.cleaned_data)
-                    feedbackForm.add_error(None, 'Успешная отправка сообщения!')
-                except:
-                    feedbackForm.add_error(None, 'Ошибка отправки сообщения')
-            else:
-                feedbackForm.add_error(None, 'Некорректно указан почтовый ящик')
-    else:
-        feedbackForm = FeedbackForm()     
-    return render(request, 'main/contact.html',{'form': feedbackForm,'title': 'My site', 'contacts': contacts[0]})
-'''
+  
 class ShowProject(DetailView):
     project = Projects
     template_name = 'main/project.html'

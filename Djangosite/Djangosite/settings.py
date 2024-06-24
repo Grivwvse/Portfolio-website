@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-owyvj%*4#x*w1o^^^myh9oh$pbwi6n*j$c%mnw0*p=$uah*r=k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'main.apps.MainConfig',
     'captcha',
+    
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'Djangosite.urls'
@@ -141,3 +144,7 @@ CACHES = {
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 CAPTCHA_IMAGE_SIZE=[100,50]
 CAPTCHA_FONT_SIZE=30
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
