@@ -1,10 +1,9 @@
 from django.db.models.query import QuerySet
-from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponse , HttpResponseNotFound, HttpResponseRedirect
+from django.shortcuts import render
+from django.http import  HttpResponseRedirect
 from .forms import FeedbackForm
 from .models import *
 from django.views.generic import ListView, DetailView, FormView
-from django.urls import reverse, reverse_lazy
 from django.views.decorators.cache import cache_page
 from django.core.cache import cache
 from django.contrib import messages
@@ -62,10 +61,6 @@ def index(request):
     skills = person.skills.first()
     experience = person.experience.all()
     education = person.education.all()
-    #------
-    #skills = Skills.objects.filter(person = person.pk).first()
-    #experience = Experience.objects.order_by('-dateEnd').filter(person=person.pk)
-    #education = Education.objects.order_by('-dateEnd').filter(person=person.pk)
 
     context = {
         'title': 'My site', 
@@ -97,11 +92,6 @@ class MainProjects(ListView):
         current_person = Person.objects.filter(active=True).first()
         return Projects.objects.order_by('pk').filter(person=current_person.pk)
 
-
-#def projects(request):
-#    projects = Projects.objects.all()
-#    return render(request, 'main/projects.html',{'title': 'My site', 'Projects': projects})
-
 class ContactFormView(FormView):
     form_class = FeedbackForm
     template_name = 'main/contact.html'
@@ -132,15 +122,3 @@ class ShowProject(DetailView):
 
     def get_queryset(self):
         return Projects.objects.all()
-'''
-def showProject(request, project_slug):
-    project = get_object_or_404(Projects, slug = project_slug)
-
-    context = {
-        'title': project.projName, 
-        'Project' : project,
-    }
-
-    return render(request, 'main/project.html', context=context)
-
-'''

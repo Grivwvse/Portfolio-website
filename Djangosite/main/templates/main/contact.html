@@ -16,7 +16,7 @@
           <div class="row">
             <div class="col-3"></div>
                 {% for message in messages %}
-                <div class="col-6 mt-4">
+                <div class="col-md-6 mt-4 col-12">
                   <div class="alert alert-primary d-flex align-items-center" role="alert">
                     <div class="text-center">
                       <li  {% if message.tags %} class="{{ message.tags }} " {% endif %}> {{ message }} </li>
@@ -26,8 +26,6 @@
                 {% endfor %}
           </div>
             {% endif %}
-         
-
       </div>
 
       <div class="row">
@@ -44,15 +42,10 @@
                     {{field.errors | striptags}}
                   </small>
                 </div>
-
-                   
-                
                 {% endif %}
                 {{field}}
               </div>
               {% endfor %}
-              
-                <!-- Checkbox -->
                 <div class="form-check d-flex justify-content-center mb-4">
                   <input
                     class="form-check-input me-2"
@@ -64,42 +57,30 @@
                     Я согласен(а) с <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">политикой конфиденциальности</a>
                   </label>
                 </div>
-
-                <!-- Submit button -->
                 <button disabled data-mdb-ripple-init type="submit" id="sendNewSms" class="btn btn-primary btn-block mb-4 btn-contact">Send</button>
               </form>
         </div>
-
        </div>
-
       <hr>
       <div class="row ">
           <div class="col-12 mb-3">
               <h2 class="text-center text-secondary mt-2">Контакты</h2>
           </div>
           <div class="col-12 mb-3 d-flex justify-content-center">
-              <!-- Twitter -->
               <a class="mx-4" style="color: #55acee;" href="{{ contacts.github }}" role="button"
               ><img class="mr-3 img-social" src="{% static 'main/images/github.svg' %}" alt="Generic placeholder image"></a>
 
-              <!-- Google -->
               <a class="mx-4" style="color: #dd4b39;" href="{{ contacts.telegram }}" role="button"
               ><img class="mr-3 img-social" src="{% static 'main/images/telegram.svg' %}" alt="Generic placeholder image"></a>
 
-              <!-- Instagram -->
               <a class="mx-4 "  style="color: #ac2bac;" role="button"
               ><img  class="mr-3 img-social section-symbol" src="{% static 'main/images/envelope-at-fill.svg' %}" alt="Generic placeholder image"></a>
-
           </div>
-
-          
       </div>
       <div class="row mt-2 mb-2" >
         <h5 class="text-center text-secondary ">г. {{contacts.location}}</h5>
       </div>
-      <!-- Information Copoyed -->
       <p class=" text-center fw-lighter  inform-user-copy"></p>
-
 </section>
 
 
@@ -116,7 +97,6 @@
   <p>
     {{contacts.policy | linebreaks}}
   </p>
-
 </div>
 </div>
 </div>
