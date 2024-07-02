@@ -32,15 +32,16 @@ def sendMail(feedbackForm):
     message = MIMEMultipart("alternative")
 
     for m in mailNotification:
-        message["Subject"] = "Обратная связь"
+        message["Subject"] = "Обратная связь 📧"
         message["From"] = m.mailLogin
         message["To"] = m.mailLogin
         message.attach(part1)
 
-        context = ssl.create_default_context()
-        with smtplib.SMTP_SSL("smtp.mail.ru", 465, context=context) as server:
-            server.login(m.mailLogin, decrypt_password(m.mailPassword))
-            server.sendmail( m.mailLogin, m.mailLogin, message.as_string())
+        smtp_server = smtplib.SMTP(m.mailSmtpServer, m.mailSmtpPort)
+        smtp_server.starttls()
+        smtp_server.login(m.mailLogin, decrypt_password(m.mailPassword))
+        smtp_server.sendmail(m.mailLogin, m.mailLogin, message.as_string())
+        smtp_server.quit()
 
     
 menu = [{'title': "Главная", 'url_name': 'home'},
@@ -49,7 +50,7 @@ menu = [{'title': "Главная", 'url_name': 'home'},
 
 #@cache_page(60 * 15)
 def index(request):
-    person = Person.objects.filter(active=True).    prefetch_related(
+    person = Person.objects.filter(active=True).prefetch_related(
         Prefetch('skills', queryset=Skills.objects.all()),
         Prefetch('education', queryset=Education.objects.order_by('-dateEnd')),
         Prefetch('experience', queryset=Experience.objects.order_by('-dateEnd'))
@@ -90,7 +91,7 @@ class MainProjects(ListView):
     
     def get_queryset(self):
         current_person = Person.objects.filter(active=True).first()
-        return Projects.objects.order_by('pk').filter(person=current_person.pk)
+        return Projects.objects.order_by('-pk').filter(person=current_person.pk)
 
 class ContactFormView(FormView):
     form_class = FeedbackForm
@@ -105,12 +106,12 @@ class ContactFormView(FormView):
     
     def form_valid(self, form):
         print(123)
-        try:
-            print(123)
-            sendMail(form.cleaned_data)
-            messages.success(self.request, 'Ваше сообщение успешно отправлено, спасибо!')
-        except:
-            messages.error(self.request, 'Возникла ошибка при отправке сообщения, повторите позже')
+        #try:
+          #  print(123)
+        sendMail(form.cleaned_data)
+        messages.success(self.request, 'Ваше сообщение успешно отправлено, спасибо!')
+        #except:
+         #   messages.error(self.request, 'Возникла ошибка при отправке сообщения, повторите позже')
         
         return HttpResponseRedirect(self.request.path_info)
   
