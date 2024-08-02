@@ -48,7 +48,7 @@ menu = [{'title': "Главная", 'url_name': 'home'},
         {'title': "Портфолио", 'url_name': 'projects'},
         {'title': "Контакты", 'url_name': 'contact'}]
 
-#@cache_page(60 * 15)
+@cache_page(60 * 15)
 def index(request):
     person = Person.objects.filter(active=True).prefetch_related(
         Prefetch('skills', queryset=Skills.objects.all()),
@@ -78,7 +78,7 @@ def index(request):
 
     return render(request, 'main/index.html', context=context)
 
-#@cache_page(60 * 15)
+@cache_page(60 * 15)
 class MainProjects(ListView):
     paginate_by = 6
     project = Projects
@@ -106,12 +106,11 @@ class ContactFormView(FormView):
     
     def form_valid(self, form):
         print(123)
-        #try:
-          #  print(123)
-        sendMail(form.cleaned_data)
-        messages.success(self.request, 'Ваше сообщение успешно отправлено, спасибо!')
-        #except:
-         #   messages.error(self.request, 'Возникла ошибка при отправке сообщения, повторите позже')
+        try:
+            sendMail(form.cleaned_data)
+            messages.success(self.request, 'Ваше сообщение успешно отправлено, спасибо!')
+        except:
+            messages.error(self.request, 'Возникла ошибка при отправке сообщения, повторите позже')
         
         return HttpResponseRedirect(self.request.path_info)
   
