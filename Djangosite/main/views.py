@@ -19,6 +19,7 @@ def split_words(self):
 
 def decrypt_password(encrypted_password):
     decrypted_password = ""
+    print("decrypt")
     for char in encrypted_password:
         decrypted_password += chr(ord(char) - 6)
     return decrypted_password
@@ -42,15 +43,14 @@ def sendMail(feedbackForm):
         smtp_server.login(m.mailLogin, decrypt_password(m.mailPassword))
         smtp_server.sendmail(m.mailLogin, m.mailLogin, message.as_string())
         smtp_server.quit()
-
     
 menu = [{'title': "Главная", 'url_name': 'home'},
         {'title': "Портфолио", 'url_name': 'projects'},
         {'title': "Контакты", 'url_name': 'contact'}]
 
-@cache_page(60 * 15)
+#@cache_page(60 * 15)
 def index(request):
-    person = Person.objects.filter(active=True).prefetch_related(
+    person = Person.objects.filter(active=True).    prefetch_related(
         Prefetch('skills', queryset=Skills.objects.all()),
         Prefetch('education', queryset=Education.objects.order_by('-dateEnd')),
         Prefetch('experience', queryset=Experience.objects.order_by('-dateEnd'))
@@ -78,7 +78,7 @@ def index(request):
 
     return render(request, 'main/index.html', context=context)
 
-@cache_page(60 * 15)
+#@cache_page(60 * 15)
 class MainProjects(ListView):
     paginate_by = 6
     project = Projects
@@ -105,7 +105,6 @@ class ContactFormView(FormView):
         return context
     
     def form_valid(self, form):
-        print(123)
         try:
             sendMail(form.cleaned_data)
             messages.success(self.request, 'Ваше сообщение успешно отправлено, спасибо!')

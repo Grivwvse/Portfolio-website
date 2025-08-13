@@ -3,6 +3,20 @@
     --color2: #f8f6f6;
 }
 
+html {
+	height: 100%;
+  }
+
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+	margin: 0;
+  }
+.main {
+	flex-grow: 1;
+  }
+
 .preview, footer, section{
     padding: 2em 0px;
 }
@@ -37,17 +51,24 @@
     pointer-events: none;
 }
 
-.team-back
-{
-	width:100%;
-	height:auto;
-	position:absolute;
-	top:0;
-	left:0;
-	padding:5px 15px 0 15px;
-	text-align:left;
-	background:#fff;
-	
+.team-back {
+    width: 100%;
+    height: 18em; /* Fixed height matching the slide distance */
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px 15px 0 15px;
+    text-align: left;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.team-back span {
+    flex: 1;
+    overflow-y: auto; /* Enable scrolling for long text */
+    padding-right: 5px; /* Space for scrollbar */
+    margin-bottom: 10px;
 }
 
 .pagination
@@ -73,7 +94,7 @@
 
 .our-team-main:hover .team-front
 {
-	bottom:-18em;
+	bottom:-20em;
 	transition: all 0.5s ease;
 }
 
@@ -164,10 +185,21 @@
     object-fit: fill;
 }
 
-.our-team-main h3
-{
-	font-size: 1em;
-	font-weight:700;
+.our-team-main h3 {
+    font-size: 1em;
+    font-weight: 700;
+    height: 2.5em; /* Fixed height for 2 lines */
+    margin: 0 auto 10px;
+    padding: 0 5px;
+    
+    /* Vertical centering */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Handle text overflow */
+    overflow: hidden;
+    text-align: center;
 }
 
 .btn-primary
@@ -197,10 +229,16 @@ footer, .preview{
 	height: 30px;
 }
 
-.btn-prev{
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.btn-prev {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    bottom: 0;
+    background-color: #fff;
+    padding: 10px 0;
+    margin-top: auto; /* Push to bottom */
+    border-top: 1px solid #f0f0f0; /* Optional separator */
 }
 
 .cookies-banner {
